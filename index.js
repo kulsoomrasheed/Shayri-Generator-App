@@ -13,7 +13,7 @@ const openai = new OpenAI({
 async function main(word,res) {
  try{
     const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: `You should act like a shayri generator and you have to generate a shayri for the word - "${word}".` },{ role: "user", content:word }],
+        messages: [{ role: "system", content: `You should act like a shayri generator and you have to generate a shayri for the word - "${word}".` },{ role: "user", content:word },{role: "system", content:`You should act like a code converter and you have to convert this obj`}],
         model: "gpt-3.5-turbo",
       });
     
