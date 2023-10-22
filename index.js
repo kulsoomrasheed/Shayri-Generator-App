@@ -4,8 +4,17 @@ const express= require('express')
 const app = express()
 app.use(cors())
 const OpenAI= require("openai");
+const rateLimit = require('express-rate-limit');
 
-
+const limiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 5, // Maximum 5 requests per hour
+    message: { error: 'Rate limit exceeded. Please try again after 1 hour.' },
+  });
+  
+  // Apply rate limiter middleware
+  app.use('/shayri', limiter);
+  
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
